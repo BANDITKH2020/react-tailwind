@@ -1,7 +1,14 @@
+import { useState } from 'react';
 import logo from '../assets/logo.png'
 import { GrLanguage } from "react-icons/gr";
+import { FaBars, FaXmark } from "react-icons/fa6";
+
 
 const Navbar = () => {
+    const [isMenuOpen , setIsMenuOpen] = useState(false);
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    }
     const navItems = [
         {link: "Overview", path: "home"},
         {link: "Feature", path: "feature"},
@@ -16,7 +23,7 @@ const Navbar = () => {
                         <img src={logo} alt="" className='w-10 inline-block items-center'/><span>XYZ</span>
                     </a>
 
-                    <ul className='md:flex space-x-12'>
+                    <ul className='hidden md:flex space-x-12'>
                         {
                             navItems.map(({link, path}) => <a key={link} href={path} className='block hover:text-gray-300'>{link}</a>)
                         }
@@ -30,6 +37,16 @@ const Navbar = () => {
                     <button className='bg-secondary py-2 px-4 transition-all duration-300 rounded hover:text-white 
                     hover:bg-indigo-600'>Sign up</button>
                 </div>
+
+                <div className='md:hidden'>
+                    <button className='text-white focus:outline-none focus:text-gray-300' 
+                    onClick={toggleMenu}>
+                        {
+                            isMenuOpen ? (<FaXmark className='w-6 h-6 text-primary'/>) : (<FaBars className='w-6 h-6 text-primary'/>)
+                        }
+                    </button>
+                </div>
+                
             </div>
         </nav>
     );
